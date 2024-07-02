@@ -1,0 +1,45 @@
+[
+	{
+		"tagName": "Head",
+		"input":
+		{
+			"id": "Head"
+		}
+	},
+	{
+		"tagName": "Body",
+		"input":
+		{
+			"tagID": "body",
+			"id": "Body",
+            "class": "dark-bg"
+		},
+		"innerContent":
+        [
+            {
+                "tagName": "Header",
+                "input":
+                {
+                    "id": "PageHeader",
+                    "class": "topbar"
+                }
+            },
+            {
+                "tagName": "Main",
+                "input":
+                {
+                    "tagID": "PageMain",
+                    "id": "MainArea",
+                    "class": "dark-bg"
+                }
+            },
+            {
+                "tagName": "Footer",
+                "input":
+                {
+                    "tagID": "PageFooter"	
+                }
+            }
+        ]
+	}
+]

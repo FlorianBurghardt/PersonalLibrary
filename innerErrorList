@@ -1,0 +1,26 @@
+__________________ ForbiddenMethods Response ______________
+[400] BAD_REQUEST
+	[9000] Method [xxx] does not exist in this class [xxx] (ForbiddenMethods::__call)
+	[9001] Static method [xxx] does not exist in this class [xxx] (ForbiddenMethods::__callStatic)
+	[9002] Property [xxx] cannot be set in this class [xxx] (ForbiddenMethods::__set)
+	[9003] Property [xxx] does not exist in this class [xxx] (ForbiddenMethods::__get)
+	[9004] On this property [xxx] cannot be checked in this class [xxx] (ForbiddenMethods::__isset)
+	[9005] This property [xxx] cannot be unset in this class [xxx] (ForbiddenMethods::__unset)
+
+__________________ AbstractStructure HTML _________________
+[404] NOT_FOUND
+	[9102] Template file not found: [xxx] (AbstractStructure::loadTemplate)
+	[9103] JSON Tag template not found: [xxx] (AbstractStructure::convertJSON)
+	[9105] Class not found: [xxx] (AbstractStructure::createTag)
+[406] NOT_ACCEPTABLE
+	[9100] TagType is not set (AbstractStructure::__construct)
+	[9106] Given content type: "[xxx]" is no valid enum value (AbstractStructure::add)
+[409] CONFLICT
+	[9101] Tag ID [xxx] already exists (AbstractStructure::addTagID)
+[413] PAYLOAD_TOO_LARGE
+	[9104] Max recursion depth reached (AbstractStructure::createTag)
+
+__________________ IEnumBase Implementation _______________
+[404] NOT_FOUND
+	[9200] [xxx] is not an element of Enum (IEnumBase::get)
+___________________________________________________________
