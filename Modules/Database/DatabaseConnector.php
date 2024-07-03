@@ -5,7 +5,6 @@ namespace de\PersonalLibrary\Modules\Database;
 use de\PersonalLibrary\Enum\KeywordsSQL;
 use de\PersonalLibrary\Enum\StatusCode;
 use de\PersonalLibrary\Exception\DatabaseConnectionException;
-use de\PersonalLibrary\Exception\ForbiddenException;
 use de\PersonalLibrary\Modules\Database\DTO\ConnectionDTO;
 use de\PersonalLibrary\Modules\Database\DTO\InputDTO;
 use de\PersonalLibrary\Modules\Database\DTO\OutputDTO;
@@ -35,16 +34,16 @@ class DatabaseConnector
 	 */
 	public function __construct(ConnectionDTO $connection)
 	{
-		if (is_null($connection->hostName) ||
-			is_null($connection->database) ||
-			is_null($connection->userName) ||
-			is_null($connection->password))
+		if (empty($connection->hostName) ||
+			empty($connection->database) ||
+			empty($connection->userName) ||
+			empty($connection->password))
 		{
 			throw new DatabaseConnectionException("Missing database connection parameters", 2000);    
 		}
 
 		$this -> connection = $connection;
-		if (is_null($connection->charset)) { $connection->charset = "utf8mb4"; }
+		if (empty($connection->charset)) { $connection->charset = "utf8mb4"; }
 	}
 
 	/**
@@ -54,7 +53,7 @@ class DatabaseConnector
 	 */
 	public function connect(): bool
 	{
-		if (!is_null($this->pdo)) { return true; }
+		if (!empty($this->pdo)) { return true; }
 		try
 		{
 			$dsn = "mysql:host={$this->connection->hostName};dbname={$this->connection->database};charset={$this->connection->charset}";
@@ -78,20 +77,20 @@ class DatabaseConnector
 	 */
 	public function disconnect(): void
 	{
-		$this->pdo = null;
+		unset($this->pdo);
 	}
 
 	/**
 	 * Create a new record in the database, specified in the InputDTO
 	 * @param InputDTO $input
-	 * @return OutputDTO 
+	 * @return OutputDTO $result->statuscode = StatusCode::CREATED on success
 	 */
 	public function create(InputDTO $input): OutputDTO
 	{
 		$result = $this->validate($input, new OutputDTO(), Request::POST);
 		if ($result->statusCode != StatusCode::OK) { return $result; }
 		
-		if (!is_null($input->dataDTO))
+		if (!empty($input->dataDTO))
 		{
 			$input->data = $this->dtoToArray($input->dataDTO);
 		}
@@ -126,7 +125,7 @@ class DatabaseConnector
 	/**
 	 * Read records from the database
 	 * @param InputDTO $input
-	 * @return OutputDTO
+	 * @return OutputDTO $result->statuscode = StatusCode::OK on success
 	 */
 	public function read(InputDTO $input)
 	{
@@ -134,11 +133,11 @@ class DatabaseConnector
 		if ($result->statusCode != StatusCode::OK) { return $result; }
 		
 		$sql = $input->query;
-		if (is_null($input->query))
+		if (empty($input->query))
 		{
 			$sql = "SELECT * FROM {$input->table}";
 
-			if (!is_null($input->conditions))
+			if (!empty($input->conditions))
 			{
 				$conditionFields = [];
 				foreach ($input->conditions as $key => $value)
@@ -150,7 +149,7 @@ class DatabaseConnector
 		}
 
 		$stmt = $this->pdo->prepare($sql);
-		if (!is_null($input->conditions))
+		if (!empty($input->conditions))
 		{
 			foreach ($input->conditions as $key => &$value)
 			{
@@ -160,68 +159,109 @@ class DatabaseConnector
 
 		$success = $stmt->execute();
 		
-		$result = new OutputDTO();
 		if (!$success)
 		{
-			$result->errorMessage = 'Datasets could not be readed';
+			$result->errorMessage = 'Datasets could not be selected';
 			$result->errorCode = 2020;
 			$result->statusCode = StatusCode::CONFLICT;
 			return $result;
 		}
 		$result->count = $stmt->rowCount();
 		$result->data = json_encode($stmt->fetchAll());
-		$result->statusCode = StatusCode::CREATED;
+		$result->statusCode = StatusCode::OK;
 		return $result;
 	}
 
+	/**
+	 * Update records in the database
+	 * @param InputDTO $input
+	 * @return OutputDTO $result->statuscode = StatusCode::OK on success
+	 */
 	public function update(InputDTO $input)
 	{
 		$result = $this->validate($input, new OutputDTO(), Request::PUT);
 		if ($result->statusCode != StatusCode::OK) { return $result; }
 
 		$updateFields = [];
-		foreach ($input->data as $key => $value) {
+		foreach ($input->data as $key => $value)
+		{
 			$updateFields[] = "$key = :$key";
 		}
+
 		$sql = "UPDATE {$input->table} SET " . implode(', ', $updateFields);
 
-		if (!empty($input->conditions)) {
+		if (!empty($input->conditions))
+		{
 			$conditionFields = [];
-			foreach ($input->conditions as $key => $value) {
+			foreach ($input->conditions as $key => $value)
+			{
 				$conditionFields[] = "$key = :$key";
 			}
 			$sql .= ' WHERE ' . implode(' AND ', $conditionFields);
 		}
 
 		$stmt = $this->pdo->prepare($sql);
-
-		foreach (array_merge($input->data, $input->conditions) as $key => &$value) {
+		foreach (array_merge($input->data, $input->conditions) as $key => &$value)
+		{
 			$stmt->bindParam(":$key", $value);
 		}
 
 		$success = $stmt->execute();
-		return new OutputDTO($success, [], $success ? '' : $stmt->errorInfo()[2]);
+
+		if (!$success)
+		{
+			$result->errorMessage = 'Datasets could not be updated';
+			$result->errorCode = 2030;
+			$result->statusCode = StatusCode::CONFLICT;
+			return $result;
+		}
+		$result->count = $stmt->rowCount();
+		// TODO: Test update() result data
+		$result->data = json_encode($stmt->fetchAll());
+		$result->statusCode = StatusCode::OK;
+		return $result;
 	}
 
-	public function delete(InputDTO $input) {
+	/**
+	 * Delete records from the database
+	 * @param InputDTO $input
+	 * @return OutputDTO $result->statuscode = StatusCode::OK on success
+	 */
+	public function delete(InputDTO $input)
+	{
+		$result = $this->validate($input, new OutputDTO(), Request::DELETE);
+		if ($result->statusCode != StatusCode::OK) { return $result; }
+
 		$sql = "DELETE FROM {$input->table}";
 
-		if (!empty($input->conditions)) {
+		if (!empty($input->conditions))
+		{
 			$conditionFields = [];
-			foreach ($input->conditions as $key => $value) {
+			foreach ($input->conditions as $key => $value)
+			{
 				$conditionFields[] = "$key = :$key";
 			}
 			$sql .= ' WHERE ' . implode(' AND ', $conditionFields);
 		}
 
 		$stmt = $this->pdo->prepare($sql);
-
-		foreach ($input->conditions as $key => &$value) {
+		foreach ($input->conditions as $key => &$value)
+		{
 			$stmt->bindParam(":$key", $value);
 		}
 
 		$success = $stmt->execute();
-		return new OutputDTO($success, [], $success ? '' : $stmt->errorInfo()[2]);
+
+		if (!$success)
+		{
+			$result->errorMessage = 'Datasets could not be deleted';
+			$result->errorCode = 2040;
+			$result->statusCode = StatusCode::CONFLICT;
+			return $result;
+		}
+		$result->count = $stmt->rowCount();
+		$result->statusCode = StatusCode::OK;
+		return $result;
 	}
 
 	private function dtoToArray(IInputDTO $dto): array
@@ -242,15 +282,20 @@ class DatabaseConnector
 	/**
 	 * Search from not allowed SQL keywords
 	 * @param (string) $query Query to search in
-	 * @return (bool)
 	 */
-	private function checkForSQLKeywords(string $query): bool
+	private function checkForSQLKeywords(string $query): array
 	{
+		$result = ['Success' => true, 'Keyword' => ''];
 		foreach (KeywordsSQL::cases() as $item)
 		{
-			if (stripos($query, $item->value)) { return false; }
+			if (stripos($query, $item->value))
+			{
+				$result['Success'] = false;
+				$result['Keyword'] = $item->value;
+				break;
+			}
 		}
-		return true;
+		return $result;
 	}
 
 	/**
@@ -271,107 +316,146 @@ class DatabaseConnector
 	{
 		if ($request === Request::POST)
 		{
-			if (!is_null($inputDTO->query))
+			if (!empty($inputDTO->query))
 			{ 
 				$outputDTO->errorMessage = 'The "query" parameter is not allowed';
-				$outputDTO->errorCode = 2100;
-				$outputDTO->statusCode = StatusCode::FORBIDDEN;
-				return $outputDTO;
-			}
-			if (is_null($inputDTO->table))
-			{ 
-				$outputDTO->errorMessage = 'The "table" parameter must be set';
-				$outputDTO->errorCode = 2101;
-				$outputDTO->statusCode = StatusCode::FORBIDDEN;
-				return $outputDTO;
-			}
-			if (!is_null($inputDTO->data) && !is_null($inputDTO->dataDTO))
-			{ 
-				$outputDTO->errorMessage = 'Only one parameter of "data" or "dataDTO" is allowed';
-				$outputDTO->errorCode = 2102;
-				$outputDTO->statusCode = StatusCode::FORBIDDEN;
-				return $outputDTO;
-			}
-			if (!is_null($inputDTO->conditions))
-			{ 
-				$outputDTO->errorMessage = 'The "conditions" parameter is not allowed';
-				$outputDTO->errorCode = 2103;
-				$outputDTO->statusCode = StatusCode::FORBIDDEN;
-				return $outputDTO;
-			}
-		}
-		if ($request === Request::GET)
-		{
-			if (!is_null($inputDTO->query) && $this->checkForSQLKeywords($inputDTO->query) === false)
-			{ 
-				$outputDTO->errorMessage = 'The "query" contains forbidden SQL keywords';
 				$outputDTO->errorCode = 2110;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
-			if (is_null($inputDTO->query) && is_null($inputDTO->table))
+			if (empty($inputDTO->table))
 			{ 
 				$outputDTO->errorMessage = 'The "table" parameter must be set';
 				$outputDTO->errorCode = 2111;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
-			if (!is_null($inputDTO->data) || !is_null($inputDTO->dataDTO))
+			if (!empty($inputDTO->data) && !empty($inputDTO->dataDTO))
 			{ 
-				$outputDTO->errorMessage = 'The parameters "data" and "dataDTO" are not allowed';
+				$outputDTO->errorMessage = 'Only one parameter of "data" or "dataDTO" is allowed';
 				$outputDTO->errorCode = 2112;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
-			if (!is_null($inputDTO->data) && !$this->isAssociativeArray($inputDTO->data))
+			if (!empty($inputDTO->conditions))
 			{ 
-				$outputDTO->errorMessage = 'The "data" parameter must be an associative array';
+				$outputDTO->errorMessage = 'The "conditions" parameter is not allowed';
 				$outputDTO->errorCode = 2113;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
-			if (!is_null($inputDTO->conditions) && !$this->isAssociativeArray($inputDTO->conditions))
-			{ 
-				$outputDTO->errorMessage = 'The "conditions" parameter must be an associative array';
-				$outputDTO->errorCode = 2114;
-				$outputDTO->statusCode = StatusCode::FORBIDDEN;
-				return $outputDTO;
-			}
 		}
-		if ($request === Request::PUT)
+		if ($request === Request::GET)
 		{
-			if (!is_null($inputDTO->query))
+			$forbiddenKeyword = $this->checkForSQLKeywords($inputDTO->query);
+			if (!empty($inputDTO->query) && $forbiddenKeyword['Success'] === false)
 			{ 
-				$outputDTO->errorMessage = 'The "query" parameter is not allowed';
+				$outputDTO->errorMessage = 'The "query" contains forbidden SQL keywords "'.$forbiddenKeyword['Keyword'].'".';
 				$outputDTO->errorCode = 2120;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
-			if (is_null($inputDTO->table))
+			if (empty($inputDTO->query) && empty($inputDTO->table))
 			{ 
 				$outputDTO->errorMessage = 'The "table" parameter must be set';
 				$outputDTO->errorCode = 2121;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
-			if (!is_null($inputDTO->data) && !is_null($inputDTO->dataDTO))
+			if (!empty($inputDTO->data) || !empty($inputDTO->dataDTO))
 			{ 
-				$outputDTO->errorMessage = 'Only one parameter of "data" or "dataDTO" is allowed';
+				$outputDTO->errorMessage = 'The parameters "data" and "dataDTO" are not allowed';
 				$outputDTO->errorCode = 2122;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
-			if (!is_null($inputDTO->data) && !$this->isAssociativeArray($inputDTO->data))
+			if (!empty($inputDTO->data) && !$this->isAssociativeArray($inputDTO->data))
 			{ 
 				$outputDTO->errorMessage = 'The "data" parameter must be an associative array';
 				$outputDTO->errorCode = 2123;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
-			if (!is_null($inputDTO->conditions) && !$this->isAssociativeArray($inputDTO->conditions))
+			if (!empty($inputDTO->conditions) && !$this->isAssociativeArray($inputDTO->conditions))
 			{ 
 				$outputDTO->errorMessage = 'The "conditions" parameter must be an associative array';
 				$outputDTO->errorCode = 2124;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+		}
+		if ($request === Request::PUT)
+		{
+			if (!empty($inputDTO->query))
+			{ 
+				$outputDTO->errorMessage = 'The "query" parameter is not allowed';
+				$outputDTO->errorCode = 2130;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+			if (empty($inputDTO->table))
+			{ 
+				$outputDTO->errorMessage = 'The "table" parameter must be set';
+				$outputDTO->errorCode = 2131;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+			if (!empty($inputDTO->data) && !empty($inputDTO->dataDTO))
+			{ 
+				$outputDTO->errorMessage = 'Only one parameter of "data" or "dataDTO" is allowed';
+				$outputDTO->errorCode = 2132;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+			if (!empty($inputDTO->data) && !$this->isAssociativeArray($inputDTO->data))
+			{ 
+				$outputDTO->errorMessage = 'The "data" parameter must be an associative array';
+				$outputDTO->errorCode = 2133;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+			if (!empty($inputDTO->conditions) && !$this->isAssociativeArray($inputDTO->conditions))
+			{ 
+				$outputDTO->errorMessage = 'The "conditions" parameter must be an associative array';
+				$outputDTO->errorCode = 2134;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+		}
+		if ($request === Request::DELETE)
+		{
+			if (!empty($inputDTO->query))
+			{ 
+				$outputDTO->errorMessage = 'The "query" parameter is not allowed';
+				$outputDTO->errorCode = 2140;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+			if (empty($inputDTO->table))
+			{ 
+				$outputDTO->errorMessage = 'The "table" parameter must be set';
+				$outputDTO->errorCode = 2141;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+			if (!empty($inputDTO->data))
+			{ 
+				$outputDTO->errorMessage = 'The parameter "data" is not allowed';
+				$outputDTO->errorCode = 2142;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+			if (!empty($inputDTO->dataDTO))
+			{ 
+				$outputDTO->errorMessage = 'The parameter "dataDTO" is not allowed';
+				$outputDTO->errorCode = 2143;
+				$outputDTO->statusCode = StatusCode::FORBIDDEN;
+				return $outputDTO;
+			}
+			if (!empty($inputDTO->conditions) && !$this->isAssociativeArray($inputDTO->conditions))
+			{ 
+				$outputDTO->errorMessage = 'The "conditions" parameter must be an associative array';
+				$outputDTO->errorCode = 2144;
 				$outputDTO->statusCode = StatusCode::FORBIDDEN;
 				return $outputDTO;
 			}
