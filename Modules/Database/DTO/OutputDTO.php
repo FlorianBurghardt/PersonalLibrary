@@ -15,7 +15,7 @@ class OutputDTO
 {
     public int $count;
     public string $data;
-    public StatusCode $statusCode;
+    public int $statusCode;
     public string $errorMessage;
     public int $errorCode;
 }

@@ -45,16 +45,27 @@ enum KeywordsSQL: string
 	case EXEC = 'EXEC';
 	case EXISTS = 'EXISTS';
 	case FOREIGN_KEY = 'FOREIGN KEY';
+	case FROM  = 'FROM';
 	case INDEX = 'INDEX';
+	case INNER_JOIN = 'INNER JOIN';
 	case INSERT_INTO_SELECT = 'INSERT INTO SELECT';
 	case INSERT_INTO = 'INSERT INTO';
 	case INSERT = 'INSERT';
+	case JOIN = 'JOIN';
+	case LEFT_INNER_JOIN = 'LEFT INNER JOIN';
+	case LEFT_JOIN = 'LEFT JOIN';
+	case LEFT_OUTER_JOIN = 'LEFT OUTER JOIN';
 	case LIMIT = 'LIMIT';
 	case OFFSET = 'OFFSET';
 	case ORDER_BY = 'ORDER BY';
+	case OUTER_JOIN = 'OUTER JOIN';
 	case PRIMARY_KEY = 'PRIMARY KEY';
 	case PROCEDURE = 'PROCEDURE';
+	case RIGHT_INNER_JOIN = 'RIGHT INNER JOIN';
+	case RIGHT_JOIN = 'RIGHT JOIN';
+	case RIGHT_OUTER_JOIN = 'RIGHT OUTER JOIN';
 	case ROWNUM = 'ROWNUM';
+	case SELECT = 'SELECT';
 	case SET = 'SET';
 	case TRUNCATE_TABLE = 'TRUNCATE TABLE';
 	case TABLE = 'TABLE';
@@ -64,5 +75,6 @@ enum KeywordsSQL: string
 	case UPDATE = 'UPDATE';
 	case VALUES = 'VALUES';
 	case VIEW = 'VIEW';
+	case WHERE = 'WHERE';
 }
 ?>

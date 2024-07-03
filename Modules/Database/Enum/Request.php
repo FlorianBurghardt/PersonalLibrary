@@ -16,5 +16,6 @@ enum Request
     case PUT;
     case POST;
     case DELETE;
+    case OPTIONS;
 }
 ?>
