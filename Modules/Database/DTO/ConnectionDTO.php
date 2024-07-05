@@ -1,6 +1,8 @@
 <?php
 #region usings
 namespace de\PersonalLibrary\Modules\Database\DTO;
+
+use de\PersonalLibrary\Modules\JSON;
 #endregion
 
 /**
@@ -17,19 +19,20 @@ class ConnectionDTO
     public string $password;
     public string $charset;
 
-    public function __construct(object $connection)
+    public function __construct(object|string|null $connection = null)
     {
-        $this->setHostName($connection->hostName);
-        $this->setDatabase($connection->database);
-        $this->setUserName($connection->userName);
-        $this->setPassword($connection->password);
-        $this->setCharset($connection->charset);
+        if (!is_null($connection))
+        {
+            if (is_string($connection)) { $connection = JSON::decode($connection, false); }
+            if (is_object($connection))
+            {
+                if (!empty($connection->hostName)) { $this->hostName = $connection->hostName; }
+                if (!empty($connection->database)) { $this->database = $connection->database; }
+                if (!empty($connection->userName)) { $this->userName = $connection->userName; }
+                if (!empty($connection->password)) { $this->password = $connection->password; }
+                if (!empty($connection->charset)) { $this->charset = $connection->charset; }
+            }
+        }
     }
-
-    public function setHostName(string $hostName): void { $this->hostName = $hostName; }
-    public function setDatabase(string $database): void { $this->database = $database; }
-    public function setUserName(string $userName): void { $this->userName = $userName; }
-    public function setPassword(string $password): void { $this->password = $password; }
-    public function setCharset(string $charset): void { $this->charset = $charset; }
 }
 ?>

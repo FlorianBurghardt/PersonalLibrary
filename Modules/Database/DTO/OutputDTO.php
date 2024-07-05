@@ -2,7 +2,7 @@
 #region usings
 namespace de\PersonalLibrary\Modules\Database\DTO;
 
-use de\PersonalLibrary\Enum\StatusCode;
+use de\PersonalLibrary\Modules\JSON;
 #endregion
 
 /**
@@ -18,5 +18,21 @@ class OutputDTO
     public int $statusCode;
     public string $errorMessage;
     public int $errorCode;
+
+    public function __construct(object|string|null $output = null)
+    {
+        if (!is_null($output))
+        {
+            if (is_string($output)) { $output = JSON::decode($output, false); }
+            if (is_object($output))
+            {
+                if (!empty($output->count)) { $this->count = (int)$output->count; }
+                if (!empty($output->data)) { $this->data = $output->data; }
+                if (!empty($output->statusCode)) { $this->statusCode = (int)$output->statusCode; }
+                if (!empty($output->errorMessage)) { $this->errorMessage = $output->errorMessage; }
+                if (!empty($output->errorCode)) { $this->errorCode = (int)$output->errorCode; } 
+            }
+        }
+    }
 }
 ?>
