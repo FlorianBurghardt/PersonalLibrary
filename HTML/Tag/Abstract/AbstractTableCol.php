@@ -5,6 +5,13 @@ namespace de\PersonalLibrary\HTML\Tag\Abstract;
 use de\PersonalLibrary\HTML\Tag\Body;
 #endregion
 
+/**
+ * Abstract base class for table columns \<col\> and \<colgroup\> HTML-Tags
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
+ * @author Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
+ */
 abstract class AbstractTableCol extends Body
 {
 	#region properties

@@ -9,10 +9,10 @@ use de\PersonalLibrary\HTML\Tag\Body;
 
 /**
  * Display class for development, debugging and testing
- * @version 1.0 
- * @version lastUpdate 2023/08/22
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 class TagInformation
 {
@@ -23,13 +23,11 @@ class TagInformation
      * Get a list of all tags with their information about there possible attributes
      * @param TagListType $resultType Type of result format
      * @param bool $printToScreenOrReturn Print to screen (true) or return result (false)
+     * @param bool $inheritsFrom [Default: true] If true, inherit from parent class.
+     * @param bool $inheritsClassNameincludingNamespace [Default: false] If true, inherit from parent class.
      * @return mixed
      */
-    public static function listTagInfos(
-        TagListType $resultType = TagListType::JSON,
-        bool $printToScreenOrReturn = true,
-        bool $inheritsFrom = true,
-        bool $inheritsClassNameincludingNamespace = false): mixed
+    public static function listTagInfos(TagListType $resultType = TagListType::JSON, bool $printToScreenOrReturn = true, bool $inheritsFrom = true, bool $inheritsClassNameincludingNamespace = false): mixed
     {
         self::readDirs();
         $result = self::tagList(
@@ -56,11 +54,15 @@ class TagInformation
         }
     }
 
-    private static function tagList(
-        TagListType $resultType,
-        bool $printToScreenOrReturn,
-        bool $inheritsFrom = true,
-        bool $inheritsClassNameincludingNamespace = false): mixed
+    /**
+     * Inner method to list all tags
+     * @param TagListType $resultType Type of result format
+     * @param bool $printToScreenOrReturn Print to screen (true) or return result (false)
+     * @param bool $inheritsFrom [Default: true] If true, inherit from parent class.
+     * @param bool $inheritsClassNameincludingNamespace [Default: false] If true, inherit from parent class.
+     * @return mixed
+     */
+    private static function tagList(TagListType $resultType, bool $printToScreenOrReturn, bool $inheritsFrom = true, bool $inheritsClassNameincludingNamespace = false): mixed
     {
         $object = new Body(null, 'Body');
         $namespaces = ['Body'=>'Tag'];

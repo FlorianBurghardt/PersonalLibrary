@@ -4,15 +4,15 @@ namespace de\PersonalLibrary\Modules;
 #endregion
 
 /**
- * JSON transformer class
- * @version 1.0 
- * @version lastUpdate 2023/07/06
+ * JSON transformer class uses standard json decoding and encoding functions
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 class JSON
 {
-	#region static methods
+	#region public static methods
 	/**
 	 * Is JSON string valid
 	 * @param string $string Potential JSON string

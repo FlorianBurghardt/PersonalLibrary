@@ -13,11 +13,11 @@ use de\PersonalLibrary\Response\ForbiddenMethods;
 #endregion
 
 /**
- * Abstract class for several HTML Tag generation Classes
- * @version 1.0 
- * @version lastUpdate 2023/07/15
+ * Abstract class for all HTML-Tag generation Classes 
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  * @throws PayloadTooLargeException
  * @throws NotFoundException
  * @throws ForbiddenException
@@ -41,7 +41,7 @@ abstract class AbstractStructure extends ForbiddenMethods
 
 	#region constructor
 	/**
-	 * Abstract constructor for several HTML Tag generation Classes
+	 * Abstract constructor for all HTML-Tag generation Classes
 	 * @param array|null $attributes Named attributes array for tag attributes
 	 * @param string|null $tagID Tag ID has to be unique when used otherwise a unique ID will be generated
 	 * @property TagList $this->tagType
@@ -129,7 +129,7 @@ abstract class AbstractStructure extends ForbiddenMethods
 	protected abstract function formatAttributes(string $result = ''): string;
 	#endregion
 
-	#region final methods
+	#region public final methods
 	/**
 	 * Load JSON files to create tags
 	 * @param AbstractStructure|array|string $content
@@ -185,7 +185,7 @@ abstract class AbstractStructure extends ForbiddenMethods
 	}
 
 	/**
-	 * Set tag attributes and display content
+	 * Render all generated tags to screen, call method only once for a site
 	 * @return void
 	 */
     public final function display(): void
@@ -251,7 +251,9 @@ abstract class AbstractStructure extends ForbiddenMethods
 		$className = substr($className, $offset+1);
 		return $className;
 	}
+	#endregion
 
+	#region private final methods
 	/**
 	 * Convert JSON tempalate to Array
 	 * @return array

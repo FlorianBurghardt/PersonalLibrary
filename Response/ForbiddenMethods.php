@@ -7,10 +7,10 @@ use de\PersonalLibrary\Exception\BadRequestException;
 
 /**
  * A base class to increase the security in the framework and to prevent the use of magic PHP methods, that are not allowed in the framework.
- * @version 1.0 
- * @version lastUpdate 2023/06/18
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 abstract class ForbiddenMethods
 {

@@ -7,8 +7,9 @@ use de\PersonalLibrary\Modules\Router\Interfaces\IRouteController;
 #endregion
 
 /**
- * @version 1.0 
- * @version lastUpdate 2024/06/28
+ * DTO for route result for generic route controller
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
  * @copyright Copyright (c) 2024, Florian Burghardt
  */

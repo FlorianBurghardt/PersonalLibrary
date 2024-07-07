@@ -9,19 +9,21 @@ use de\PersonalLibrary\Modules\Router\Interfaces\IRouteEnum;
 #endregion
 
 /**
- * GenericRouter to handle routes by namespace and routes enum
+ * Generic router to handle routes by namespace and routes enum
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
- * @package de\PersonalLibrary\Modules\Router
- * @version 1.0
- * @access public
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 class GenericRouter
 {
+	#region properties
 	private string $namespace;
     private string $enumClass;
 	private RouteResultDTO $result;
+	#endregion
 
+	#region constructor
 	/**
 	 * Constructor to handle routes by namespace and routes enum
 	 * @param string $namespace The namespace of the controller class
@@ -34,7 +36,9 @@ class GenericRouter
 		$this->enumClass = $enumClass;
 		$this->result = new RouteResultDTO();
 	}
+	#endregion
 
+	#region public methods
 	/**
 	 * Get the controller for the given route within RouteResultDTO
 	 * @param string $route
@@ -90,5 +94,6 @@ class GenericRouter
 		$this->result->controller = $controller;
 		return $this->result;
 	}
+	#endregion
 }
 ?>

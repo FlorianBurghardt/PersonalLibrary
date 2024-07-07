@@ -4,10 +4,11 @@ namespace de\PersonalLibrary\Enum;
 #endregion
 
 /**
- * @version 1.0 
- * @version lastUpdate 2023/06/22
+ * Interface for all Enums with methods to search by keyword.
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 interface IEnumBase
 {

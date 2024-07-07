@@ -6,10 +6,11 @@ use de\PersonalLibrary\Modules\JSON;
 #endregion
 
 /**
+ * DTO for output data from database with HTML StatusCode, errorMessage and errorCode (from DatabaseConnector)
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
  * @copyright Copyright (c) 2024, Florian Burghardt
- * @version 1.0
- * @access public
  */
 class OutputDTO
 {

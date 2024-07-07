@@ -11,11 +11,11 @@ use de\PersonalLibrary\HTML\Tag\Abstract\AbstractStructure;
 #endregion
 
 /**
- * This class represents the <body> HTML-Tag.
- * @version 1.0 
- * @version lastUpdate 2023/08/22
+ * This class represents the <body> HTML-Tag. It is the root of the HTML-Tag-Tree.
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 class Body extends AbstractStructure
 {

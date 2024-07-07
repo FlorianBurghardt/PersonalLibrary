@@ -5,10 +5,10 @@ namespace de\PersonalLibrary\Exception;
 
 /**
  * Main exception for internal exception handling
- * @version 1.0 
- * @version lastUpdate 2023/06/18
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 class MyException extends \Exception
 {

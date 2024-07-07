@@ -7,10 +7,11 @@ use de\PersonalLibrary\Modules\JSON;
 #endregion
 
 /**
+ * DTO for input data into database with generic dataDTO (see IInputDTO) 
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
  * @copyright Copyright (c) 2024, Florian Burghardt
- * @version 1.0
- * @access public
  */
 class InputDTO
 {
