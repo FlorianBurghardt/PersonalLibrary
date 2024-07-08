@@ -5,14 +5,14 @@ namespace de\PersonalLibrary\Modules;
 
 /**
  * This is a class for development, debugging and testing to print different types of information to the screen
- * @version 1.0 
- * @version lastUpdate 2023/07/06
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 class InputRenderer
 {
-	#region static methods
+	#region public static methods
 	/**
 	 * Prints several types to the screen
 	 * @param mixed $input The input value. Supported types: Null, Bool, Int, Float, String, JSON, Array, Object
@@ -34,12 +34,12 @@ class InputRenderer
 		}
 		else if(is_int($input)) { $type = 'Int'; }			// Type: Int
 		else if(is_float($input)) { $type = 'Float'; }		// Type: Float
-		else if(is_array($input)) { $type = 'Array'; }		// Type: Array
 		else if(is_object($input))							// Type: Object
 		{
 			$type = 'Object';
 			$input = (array)$input;
 		}
+		else if(is_array($input)) { $type = 'Array'; }		// Type: Array
 		else if(JSON::is_json($input))						// Type: JSON
 		{
 			$type = 'JSON';

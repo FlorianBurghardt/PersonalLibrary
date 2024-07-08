@@ -14,10 +14,10 @@ use de\PersonalLibrary\Logger\Enum\LogLevel;
  * @property static array|null $uriSegments URI elements
  * @property static array|null $queryParams URI parameters & request body (JSON string)
  * @property static array|null $requestBody Request body (php://input)
- * @version 1.0 
- * @version lastUpdate 2023/06/18
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 class Response extends ForbiddenMethods
 {
@@ -48,7 +48,7 @@ class Response extends ForbiddenMethods
 	}
 	#endregion
 
-	#region getter / setter
+	#region static getter / setter
 	public static function getStatusCode(): int { return self::$status->value; }
 	public static function getStatusTitle(): string
 	{
@@ -99,9 +99,6 @@ class Response extends ForbiddenMethods
 
 		if (JSON::is_json($input)) { self::$requestBody = JSON::decode($input,true); }
 	}
-	#endregion
-
-	#region response methods
 	public static function getResponse(): array
 	{
 		$response = array('statusCode' => self::$status->value, 'statusTitle' => self::getStatusTitle());
@@ -112,7 +109,6 @@ class Response extends ForbiddenMethods
 		$response += array('result' => self::$result);
 		return $response;
 	}
-
 	public static function setResponse(
 		StatusCode $status,
 		int $innerCode,
@@ -129,7 +125,6 @@ class Response extends ForbiddenMethods
 		self::setResult($result, $count);
 		self::$sendErrorMail = $sendErrorMail;
 	}
-
 	public static function getEmailResponse(array $input): string
 	{
 		$message = JSON::encode($input);
@@ -138,9 +133,7 @@ class Response extends ForbiddenMethods
 		$message = str_replace(',',"\r\n",$message);
 		$message = str_replace("}","",$message);
 		return $message;
-	}
-
-	public static function getJSON(): string
+	}	public static function getJSON(): string
 	{
 		return JSON::encode(array(
 			'statusCode' => self::$status->value,
@@ -150,7 +143,6 @@ class Response extends ForbiddenMethods
 			'count' => self::$count,
 			'result' => self::$result));
 	}
-
 	public static function getLog(): string
 	{
 		$messageString = '['.self::$status->value.'] ';

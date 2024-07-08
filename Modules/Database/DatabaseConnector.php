@@ -16,16 +16,20 @@ use ReflectionClass;
 #endregion
 
 /**
+ * Database connector for PDO with generic input and output DTOs
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
  * @copyright Copyright (c) 2024, Florian Burghardt
- * @version 1.0
- * @access public
  */
 class DatabaseConnector
 {
+	#region properties
 	private ConnectionDTO $connection;
 	private PDO $pdo;
+	#endregion
 
+	#region constructors
 	/**
 	 * DatabaseConnector constructor.
 	 * @param ConnectionDTO $connection
@@ -45,7 +49,9 @@ class DatabaseConnector
 		$this -> connection = $connection;
 		if (empty($connection->charset)) { $connection->charset = "utf8mb4"; }
 	}
+	#endregion
 
+	#region public methods
 	/**
 	 * Connect to the database
 	 * @throws DatabaseConnectionException
@@ -321,7 +327,14 @@ class DatabaseConnector
 		$result->statusCode = StatusCode::OK->value;
 		return $result;
 	}
+	#endregion
 
+	#region private methods
+	/**
+	 * Convert an IInputDTO to an array
+	 * @param IInputDTO $dto
+	 * @return array
+	 */
 	private function dtoToArray(IInputDTO $dto): array
 	{
 		$reflectionClass = new ReflectionClass($dto);
@@ -371,6 +384,13 @@ class DatabaseConnector
 		return false;
 	}
 
+	/**
+	 * Validate input data and return by OutputDTO with StatusCode, error messages and error codes
+	 * @param InputDTO $inputDTO
+	 * @param OutputDTO $outputDTO
+	 * @param Request $request
+	 * @return OutputDTO $outputDTO
+	 */
 	private function validate(InputDTO $inputDTO, OutputDTO $outputDTO, Request $request):OutputDTO
 	{
 		if ($request === Request::POST)
@@ -540,5 +560,6 @@ class DatabaseConnector
 		$outputDTO->statusCode = StatusCode::OK->value;
 		return $outputDTO;
 	}
+	#endregion
 }
 ?>

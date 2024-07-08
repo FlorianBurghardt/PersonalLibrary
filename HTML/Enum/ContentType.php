@@ -4,10 +4,11 @@ namespace de\PersonalLibrary\HTML\Enum;
 #endregion
 
 /**
- * @version 1.0 
- * @version lastUpdate 2023/08/02
+ * Content type for add method
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 enum ContentType: string
 {

@@ -5,14 +5,14 @@ namespace de\PersonalLibrary\Modules;
 
 /**
  * Automatic file loader
- * @version 1.0 
- * @version lastUpdate 2023/07/06
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
  * @author Florian Burghardt
- * @copyright Copyright (c) 2023, Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
  */
 class FileLoader
 {
-	#region static methods
+	#region public static methods
 	/**
 	 * Get all files from directory and subdirectories
 	 * @param string $dir Directory to scan

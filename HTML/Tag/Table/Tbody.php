@@ -6,6 +6,12 @@ use de\PersonalLibrary\HTML\Enum\TagList;
 use de\PersonalLibrary\HTML\Tag\Body;
 #endregion
 
+/**
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
+ * @author Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
+ */
 class Tbody extends Body
 {
 	#region constructor

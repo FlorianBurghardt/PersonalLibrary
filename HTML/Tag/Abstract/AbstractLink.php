@@ -3,6 +3,13 @@
 namespace de\PersonalLibrary\HTML\Tag\Abstract;
 #endregion
 
+/**
+ * Abstract base class for \<a\> HTML-Tag attributes
+ * @version 1.0.0
+ * @version lastUpdate 2024/07/07
+ * @author Florian Burghardt
+ * @copyright Copyright (c) 2024, Florian Burghardt
+ */
 abstract class AbstractLink extends AbstractMedia
 {
 	#region properties
