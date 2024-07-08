@@ -34,12 +34,12 @@ class InputRenderer
 		}
 		else if(is_int($input)) { $type = 'Int'; }			// Type: Int
 		else if(is_float($input)) { $type = 'Float'; }		// Type: Float
-		else if(is_array($input)) { $type = 'Array'; }		// Type: Array
 		else if(is_object($input))							// Type: Object
 		{
 			$type = 'Object';
 			$input = (array)$input;
 		}
+		else if(is_array($input)) { $type = 'Array'; }		// Type: Array
 		else if(JSON::is_json($input))						// Type: JSON
 		{
 			$type = 'JSON';
