@@ -49,7 +49,7 @@ class Video extends AbstractPlayable
 	}
 	protected function mapVideo(): void
 	{
-		if (isset($this->attributes['poster'])) { $this->poster = $this->attributes['poster']; }
+		if (isset($this->attributes['poster'])) { $this->poster = (string)$this->attributes['poster']; }
 		if (isset($this->attributes['width'])) { $this->width = (int)$this->attributes['width']; }
 		if (isset($this->attributes['height'])) { $this->height = (int)$this->attributes['height']; }
 	}

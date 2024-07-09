@@ -69,10 +69,10 @@ class Iframe extends AbstractMedia
 	}
 	protected function mapIframe(): void
 	{
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
-		if (isset($this->attributes['srcdoc'])) { $this->srcdoc = $this->attributes['srcdoc']; }
-		if (isset($this->attributes['allow'])) { $this->allow = $this->attributes['allow']; }
-		if (isset($this->attributes['loading'])) { $this->loading = $this->attributes['loading']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
+		if (isset($this->attributes['srcdoc'])) { $this->srcdoc = (string)$this->attributes['srcdoc']; }
+		if (isset($this->attributes['allow'])) { $this->allow = (string)$this->attributes['allow']; }
+		if (isset($this->attributes['loading'])) { $this->loading = (string)$this->attributes['loading']; }
 		if (isset($this->attributes['sandbox'])) { $this->sandbox = (bool)$this->attributes['sandbox']; }
 		if (isset($this->attributes['allowfullscreen'])) { $this->allowfullscreen = (bool)$this->attributes['allowfullscreen']; }
 		if (isset($this->attributes['allowpaymentrequest'])) { $this->allowpaymentrequest = (bool)$this->attributes['allowpaymentrequest']; }

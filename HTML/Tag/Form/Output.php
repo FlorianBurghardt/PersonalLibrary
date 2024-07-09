@@ -49,9 +49,9 @@ class Output extends Body
 	}
 	protected function mapOutput(): void
 	{
-		if (isset($this->attributes['for'])) { $this->for = $this->attributes['for']; }
-		if (isset($this->attributes['form'])) { $this->form = $this->attributes['form']; }
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
+		if (isset($this->attributes['for'])) { $this->for = (string)$this->attributes['for']; }
+		if (isset($this->attributes['form'])) { $this->form = (string)$this->attributes['form']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
 	}
 	#endregion
 }

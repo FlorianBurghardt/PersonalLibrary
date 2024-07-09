@@ -60,8 +60,8 @@ abstract class AbstractPlayable extends Body
 	}
 	protected function mapAbstractPlayable(): void
 	{
-		if (isset($this->attributes['preload'])) { $this->preload = $this->attributes['preload']; }
-		if (isset($this->attributes['src'])) { $this->src = $this->attributes['src']; }
+		if (isset($this->attributes['preload'])) { $this->preload = (string)$this->attributes['preload']; }
+		if (isset($this->attributes['src'])) { $this->src = (string)$this->attributes['src']; }
 		if (isset($this->attributes['autoplay'])) { $this->autoplay = (bool)$this->attributes['autoplay']; }
 		if (isset($this->attributes['controls'])) { $this->controls = (bool)$this->attributes['controls']; }
 		if (isset($this->attributes['loop'])) { $this->loop = (bool)$this->attributes['loop']; }

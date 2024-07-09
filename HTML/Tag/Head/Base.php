@@ -46,8 +46,8 @@ final class Base extends Body
 	}
 	protected function mapBase(): void
 	{
-		if (isset($this->attributes['href'])) { $this->href = $this->attributes['href']; }
-		if (isset($this->attributes['target'])) { $this->target = $this->attributes['target']; }
+		if (isset($this->attributes['href'])) { $this->href = (string)$this->attributes['href']; }
+		if (isset($this->attributes['target'])) { $this->target = (string)$this->attributes['target']; }
 	}
 	#endregion
 }

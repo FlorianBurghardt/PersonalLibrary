@@ -45,8 +45,8 @@ class Th extends AbstractTableCell
 	}
 	protected function mapTh(): void
 	{
-		if (isset($this->attributes['abbr'])) { $this->abbr = $this->attributes['abbr']; }
-		if (isset($this->attributes['scope'])) { $this->scope = $this->attributes['scope']; }
+		if (isset($this->attributes['abbr'])) { $this->abbr = (string)$this->attributes['abbr']; }
+		if (isset($this->attributes['scope'])) { $this->scope = (string)$this->attributes['scope']; }
 	}
 	#endregion
 }

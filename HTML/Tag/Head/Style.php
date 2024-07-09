@@ -45,8 +45,8 @@ final class Style extends Body
 	}
 	protected function mapStyle(): void
 	{
-		if (isset($this->attributes['media'])) { $this->media = $this->attributes['media']; }
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
+		if (isset($this->attributes['media'])) { $this->media = (string)$this->attributes['media']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
 	}
 	#endregion
 }

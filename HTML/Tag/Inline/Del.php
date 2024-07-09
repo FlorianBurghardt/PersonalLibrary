@@ -41,7 +41,7 @@ class Del extends Blockquote
 	}
 	protected function mapDel(): void
 	{
-		if (isset($this->attributes['datetime'])) { $this->datetime = $this->attributes['datetime']; }
+		if (isset($this->attributes['datetime'])) { $this->datetime = (string)$this->attributes['datetime']; }
 	}
 	#endregion
 }

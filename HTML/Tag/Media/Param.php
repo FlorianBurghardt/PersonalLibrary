@@ -45,8 +45,8 @@ class Param extends Body
 	}
 	protected function mapParam(): void
 	{
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
-		if (isset($this->attributes['value'])) { $this->value = $this->attributes['value']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
+		if (isset($this->attributes['value'])) { $this->value = (string)$this->attributes['value']; }
 	}
 	#endregion
 }

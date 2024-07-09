@@ -41,7 +41,7 @@ class Blockquote extends Body
 	}
 	protected function mapBlockquote(): void
 	{
-		if (isset($this->attributes['cite'])) { $this->cite = $this->attributes['cite']; }
+		if (isset($this->attributes['cite'])) { $this->cite = (string)$this->attributes['cite']; }
 	}
 	#endregion
 }

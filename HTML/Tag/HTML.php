@@ -48,9 +48,9 @@ final class HTML extends Body
 	}
 	protected function mapHTML(): void
 	{
-		if (isset($this->attributes['lang'])) { $this->lang = $this->attributes['lang']; }
-		if (isset($this->attributes['dir'])) { $this->dir = $this->attributes['dir']; }
-		if (isset($this->attributes['manifest'])) { $this->manifest = $this->attributes['manifest']; }
+		if (isset($this->attributes['lang'])) { $this->lang = (string)$this->attributes['lang']; }
+		if (isset($this->attributes['dir'])) { $this->dir = (string)$this->attributes['dir']; }
+		if (isset($this->attributes['manifest'])) { $this->manifest = (string)$this->attributes['manifest']; }
 	}
 	#endregion
 }

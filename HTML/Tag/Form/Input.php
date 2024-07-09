@@ -161,25 +161,25 @@ class Input extends Body
 	}
 	protected function mapInput(): void
 	{
-		if (isset($this->attributes['accept'])) { $this->accept = $this->attributes['accept']; }
-		if (isset($this->attributes['alt'])) { $this->alt = $this->attributes['alt']; }
-		if (isset($this->attributes['autocomplete'])) { $this->autocomplete = $this->attributes['autocomplete']; }
-		if (isset($this->attributes['dirname'])) { $this->dirname = $this->attributes['dirname']; }
-		if (isset($this->attributes['form'])) { $this->form = $this->attributes['form']; }
-		if (isset($this->attributes['formaction'])) { $this->formaction = $this->attributes['formaction']; }
-		if (isset($this->attributes['formenctype'])) { $this->formenctype = $this->attributes['formenctype']; }
-		if (isset($this->attributes['formmethod'])) { $this->formmethod = $this->attributes['formmethod']; }
-		if (isset($this->attributes['formtarget'])) { $this->formtarget = $this->attributes['formtarget']; }
-		if (isset($this->attributes['list'])) { $this->list = $this->attributes['list']; }
-		if (isset($this->attributes['max'])) { $this->max = $this->attributes['max']; }
-		if (isset($this->attributes['min'])) { $this->min = $this->attributes['min']; }
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
-		if (isset($this->attributes['pattern'])) { $this->pattern = $this->attributes['pattern']; }
-		if (isset($this->attributes['placeholder'])) { $this->placeholder = $this->attributes['placeholder']; }
-		if (isset($this->attributes['src'])) { $this->src = $this->attributes['src']; }
-		if (isset($this->attributes['step'])) { $this->step = $this->attributes['step']; }
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
-		if (isset($this->attributes['value'])) { $this->value = $this->attributes['value']; }
+		if (isset($this->attributes['accept'])) { $this->accept = (string)$this->attributes['accept']; }
+		if (isset($this->attributes['alt'])) { $this->alt = (string)$this->attributes['alt']; }
+		if (isset($this->attributes['autocomplete'])) { $this->autocomplete = (string)$this->attributes['autocomplete']; }
+		if (isset($this->attributes['dirname'])) { $this->dirname = (string)$this->attributes['dirname']; }
+		if (isset($this->attributes['form'])) { $this->form = (string)$this->attributes['form']; }
+		if (isset($this->attributes['formaction'])) { $this->formaction = (string)$this->attributes['formaction']; }
+		if (isset($this->attributes['formenctype'])) { $this->formenctype = (string)$this->attributes['formenctype']; }
+		if (isset($this->attributes['formmethod'])) { $this->formmethod = (string)$this->attributes['formmethod']; }
+		if (isset($this->attributes['formtarget'])) { $this->formtarget = (string)$this->attributes['formtarget']; }
+		if (isset($this->attributes['list'])) { $this->list = (string)$this->attributes['list']; }
+		if (isset($this->attributes['max'])) { $this->max = (string)$this->attributes['max']; }
+		if (isset($this->attributes['min'])) { $this->min = (string)$this->attributes['min']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
+		if (isset($this->attributes['pattern'])) { $this->pattern = (string)$this->attributes['pattern']; }
+		if (isset($this->attributes['placeholder'])) { $this->placeholder = (string)$this->attributes['placeholder']; }
+		if (isset($this->attributes['src'])) { $this->src = (string)$this->attributes['src']; }
+		if (isset($this->attributes['step'])) { $this->step = (string)$this->attributes['step']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
+		if (isset($this->attributes['value'])) { $this->value = (string)$this->attributes['value']; }
 		if (isset($this->attributes['height'])) { $this->height = (int)$this->attributes['height']; }
 		if (isset($this->attributes['maxlength'])) { $this->maxlength = (int)$this->attributes['maxlength']; }
 		if (isset($this->attributes['minlength'])) { $this->minlength = (int)$this->attributes['minlength']; }

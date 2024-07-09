@@ -41,7 +41,7 @@ class Embed extends AbstractMedia
 	}
 	protected function mapEmbed(): void
 	{
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
 	}
 	#endregion
 }

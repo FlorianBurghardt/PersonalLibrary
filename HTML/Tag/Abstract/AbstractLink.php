@@ -58,12 +58,12 @@ abstract class AbstractLink extends AbstractMedia
 	}
 	protected function mapAbstractLink(): void
 	{
-		if (isset($this->attributes['href'])) { $this->href = $this->attributes['href']; }
-		if (isset($this->attributes['hreflang'])) { $this->hreflang = $this->attributes['hreflang']; }
-		if (isset($this->attributes['media'])) { $this->media = $this->attributes['media']; }
-		if (isset($this->attributes['rel'])) { $this->rel = $this->attributes['rel']; }
-		if (isset($this->attributes['target'])) { $this->target = $this->attributes['target']; }
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
+		if (isset($this->attributes['href'])) { $this->href = (string)$this->attributes['href']; }
+		if (isset($this->attributes['hreflang'])) { $this->hreflang = (string)$this->attributes['hreflang']; }
+		if (isset($this->attributes['media'])) { $this->media = (string)$this->attributes['media']; }
+		if (isset($this->attributes['rel'])) { $this->rel = (string)$this->attributes['rel']; }
+		if (isset($this->attributes['target'])) { $this->target = (string)$this->attributes['target']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
 	}
 	#endregion
 }

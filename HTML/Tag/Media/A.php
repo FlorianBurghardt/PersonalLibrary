@@ -45,7 +45,7 @@ class A extends AbstractLink
 	}
 	protected function mapA(): void
 	{
-		if (isset($this->attributes['ping'])) { $this->ping = $this->attributes['ping']; }
+		if (isset($this->attributes['ping'])) { $this->ping = (string)$this->attributes['ping']; }
 		if (isset($this->attributes['download'])) { $this->download = (bool)$this->attributes['download']; }
 	}
 	#endregion

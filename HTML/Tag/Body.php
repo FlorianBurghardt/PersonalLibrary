@@ -49,12 +49,12 @@ class Body extends AbstractStructure
 		parent::__construct($attributes, $tagID);
 
 		$this->mapBody();
-		if (isset($this->attributes['data'])) { $this->mapData($this->attributes['data']); }
-		if (isset($this->attributes['aria'])) { $this->mapAria($this->attributes['aria']); }
+		if (isset($this->attributes['data'])) { $this->mapData((array)$this->attributes['data']); }
+		if (isset($this->attributes['aria'])) { $this->mapAria((array)$this->attributes['aria']); }
 		if (isset($this->attributes['events']))
 		{
-			if ($this->isBodyClass()) { $this->mapBodyEvents($this->attributes['events']); }
-			$this->mapEvents($this->attributes['events']);
+			if ($this->isBodyClass()) { $this->mapBodyEvents((array)$this->attributes['events']); }
+			$this->mapEvents((array)$this->attributes['events']);
 		}
 	}
 	#endregion
@@ -138,14 +138,14 @@ class Body extends AbstractStructure
 
 	protected function mapBody(): void
 	{
-		if (isset($this->attributes['id'])) { $this->id = $this->attributes['id']; }
-		if (isset($this->attributes['class'])) { $this->class = $this->attributes['class']; }
-		if (isset($this->attributes['title'])) { $this->title = $this->attributes['title']; }
-		if (isset($this->attributes['style'])) { $this->style = $this->attributes['style']; }
-		if (isset($this->attributes['accesskey'])) { $this->accesskey = $this->attributes['accesskey']; }
-		if (isset($this->attributes['dropzone'])) { $this->dropzone = $this->attributes['dropzone']; }
-		if (isset($this->attributes['dir'])) { $this->dir = $this->attributes['dir']; }
-		if (isset($this->attributes['role'])) { $this->role = $this->attributes['role']; }
+		if (isset($this->attributes['id'])) { $this->id = (string)$this->attributes['id']; }
+		if (isset($this->attributes['class'])) { $this->class = (string)$this->attributes['class']; }
+		if (isset($this->attributes['title'])) { $this->title = (string)$this->attributes['title']; }
+		if (isset($this->attributes['style'])) { $this->style = (string)$this->attributes['style']; }
+		if (isset($this->attributes['accesskey'])) { $this->accesskey = (string)$this->attributes['accesskey']; }
+		if (isset($this->attributes['dropzone'])) { $this->dropzone = (string)$this->attributes['dropzone']; }
+		if (isset($this->attributes['dir'])) { $this->dir = (string)$this->attributes['dir']; }
+		if (isset($this->attributes['role'])) { $this->role = (string)$this->attributes['role']; }
 		if (isset($this->attributes['tabindex'])) { $this->tabindex = (int)$this->attributes['tabindex']; }
 		if (isset($this->attributes['contenteditable'])) { $this->contenteditable = (bool)$this->attributes['contenteditable']; }
 		if (isset($this->attributes['draggable'])) { $this->draggable = (bool)$this->attributes['draggable']; }
@@ -183,7 +183,7 @@ class Body extends AbstractStructure
 
 			$this->bodyEvents->mapBodyEvents($bodyEvents);
 
-			foreach ($this->bodyEvents as $key => $value) { $this->events[$key] = $value; }
+			foreach ($this->bodyEvents as $key => $value) { $this->events[$key] = (string)$value; }
 		}
 	}
 
@@ -195,7 +195,7 @@ class Body extends AbstractStructure
 
 			$this->globalEvents->mapEvents($globalEvents);
 
-			foreach ($this->globalEvents as $key => $value) { $this->events[$key] = $value; }
+			foreach ($this->globalEvents as $key => $value) { $this->events[$key] = (string)$value; }
 		}
 	}
 

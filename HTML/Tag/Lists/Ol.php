@@ -45,7 +45,7 @@ class Ol extends AbstractList
 	}
 	protected function mapOl(): void
 	{
-		if (isset($this->attributes['start'])) { $this->start = $this->attributes['start']; }
+		if (isset($this->attributes['start'])) { $this->start = (string)$this->attributes['start']; }
 		if (isset($this->attributes['reversed'])) { $this->reversed = (bool)$this->attributes['reversed']; }
 	}
 	#endregion

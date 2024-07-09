@@ -54,10 +54,10 @@ final class Meta extends Body
 	}
 	protected function mapMeta(): void
 	{
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
-		if (isset($this->attributes['content'])) { $this->content = $this->attributes['content']; }
-		if (isset($this->attributes['charset'])) { $this->charset = $this->attributes['charset']; }
-		if (isset($this->attributes['httpEquiv'])) { $this->httpEquiv = $this->attributes['httpEquiv']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
+		if (isset($this->attributes['content'])) { $this->content = (string)$this->attributes['content']; }
+		if (isset($this->attributes['charset'])) { $this->charset = (string)$this->attributes['charset']; }
+		if (isset($this->attributes['httpEquiv'])) { $this->httpEquiv = (string)$this->attributes['httpEquiv']; }
 	}
 	#endregion
 }

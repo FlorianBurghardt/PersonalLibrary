@@ -40,7 +40,7 @@ abstract class AbstractList extends Body
 	}
 	protected function mapAbstractList(): void
 	{
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
 	}
 	#endregion
 }

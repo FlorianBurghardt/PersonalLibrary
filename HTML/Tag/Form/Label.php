@@ -45,8 +45,8 @@ class Label extends Body
 	}
 	protected function mapLabel(): void
 	{
-		if (isset($this->attributes['for'])) { $this->for = $this->attributes['for']; }
-		if (isset($this->attributes['form'])) { $this->form = $this->attributes['form']; }
+		if (isset($this->attributes['for'])) { $this->for = (string)$this->attributes['for']; }
+		if (isset($this->attributes['form'])) { $this->form = (string)$this->attributes['form']; }
 	}
 	#endregion
 }

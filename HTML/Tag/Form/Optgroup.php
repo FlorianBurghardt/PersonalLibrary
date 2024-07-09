@@ -45,7 +45,7 @@ class Optgroup extends Body
 	}
 	protected function mapOptgroup(): void
 	{
-		if (isset($this->attributes['label'])) { $this->label = $this->attributes['label']; }
+		if (isset($this->attributes['label'])) { $this->label = (string)$this->attributes['label']; }
 		if (isset($this->attributes['disabled'])) { $this->disabled = (bool)$this->attributes['disabled']; }
 	}
 	#endregion

@@ -73,12 +73,12 @@ final class Script extends Body
 	}
 	protected function mapScript(): void
 	{
-		if (isset($this->attributes['src'])) { $this->src = $this->attributes['src']; }
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
-		if (isset($this->attributes['charset'])) { $this->charset = $this->attributes['charset']; }
-		if (isset($this->attributes['crossorigin'])) { $this->crossorigin = $this->attributes['crossorigin']; }
-		if (isset($this->attributes['integrity'])) { $this->integrity = $this->attributes['integrity']; }
-		if (isset($this->attributes['referrerpolicy'])) { $this->referrerpolicy = $this->attributes['referrerpolicy']; }
+		if (isset($this->attributes['src'])) { $this->src = (string)$this->attributes['src']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
+		if (isset($this->attributes['charset'])) { $this->charset = (string)$this->attributes['charset']; }
+		if (isset($this->attributes['crossorigin'])) { $this->crossorigin = (string)$this->attributes['crossorigin']; }
+		if (isset($this->attributes['integrity'])) { $this->integrity = (string)$this->attributes['integrity']; }
+		if (isset($this->attributes['referrerpolicy'])) { $this->referrerpolicy = (string)$this->attributes['referrerpolicy']; }
 		if (isset($this->attributes['async'])) { $this->async = (bool)$this->attributes['async']; }
 		if (isset($this->attributes['defer'])) { $this->defer = (bool)$this->attributes['defer']; }
 		if (isset($this->attributes['nomodule'])) { $this->nomodule = (bool)$this->attributes['nomodule']; }

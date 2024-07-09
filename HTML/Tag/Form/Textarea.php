@@ -85,11 +85,11 @@ class Textarea extends Body
 	}
 	protected function mapTextarea(): void
 	{
-		if (isset($this->attributes['dirname'])) { $this->dirname = $this->attributes['dirname']; }
-		if (isset($this->attributes['form'])) { $this->form = $this->attributes['form']; }
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
-		if (isset($this->attributes['placeholder'])) { $this->placeholder = $this->attributes['placeholder']; }
-		if (isset($this->attributes['wrap'])) { $this->wrap = $this->attributes['wrap']; }
+		if (isset($this->attributes['dirname'])) { $this->dirname = (string)$this->attributes['dirname']; }
+		if (isset($this->attributes['form'])) { $this->form = (string)$this->attributes['form']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
+		if (isset($this->attributes['placeholder'])) { $this->placeholder = (string)$this->attributes['placeholder']; }
+		if (isset($this->attributes['wrap'])) { $this->wrap = (string)$this->attributes['wrap']; }
 		if (isset($this->attributes['cols'])) { $this->cols = (int)$this->attributes['cols']; }
 		if (isset($this->attributes['maxlength'])) { $this->maxlength = (int)$this->attributes['maxlength']; }
 		if (isset($this->attributes['rows'])) { $this->rows = (int)$this->attributes['rows']; }

@@ -48,7 +48,7 @@ abstract class AbstractTableCell extends Body
 	}
 	protected function mapAbstractTableCell(): void
 	{
-		if (isset($this->attributes['headers'])) { $this->headers = $this->attributes['headers']; }
+		if (isset($this->attributes['headers'])) { $this->headers = (string)$this->attributes['headers']; }
 		if (isset($this->attributes['colspan'])) { $this->colspan = (int)$this->attributes['colspan']; }
 		if (isset($this->attributes['rowspan'])) { $this->rowspan = (int)$this->attributes['rowspan']; }
 	}

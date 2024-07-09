@@ -53,9 +53,9 @@ class Area extends AbstractLink
 	}
 	protected function mapArea(): void
 	{
-		if (isset($this->attributes['alt'])) { $this->alt = $this->attributes['alt']; }
-		if (isset($this->attributes['coords'])) { $this->coords = $this->attributes['coords']; }
-		if (isset($this->attributes['shape'])) { $this->shape = $this->attributes['shape']; }
+		if (isset($this->attributes['alt'])) { $this->alt = (string)$this->attributes['alt']; }
+		if (isset($this->attributes['coords'])) { $this->coords = (string)$this->attributes['coords']; }
+		if (isset($this->attributes['shape'])) { $this->shape = (string)$this->attributes['shape']; }
 		if (isset($this->attributes['download'])) { $this->download = (bool)$this->attributes['download']; }
 	}
 	#endregion

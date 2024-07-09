@@ -60,10 +60,10 @@ abstract class AbstractMedia extends Body
 	}
 	protected function mapAbstractMedia(): void
 	{
-		if (isset($this->attributes['src'])) { $this->src = $this->attributes['src']; }
-		if (isset($this->attributes['referrerpolicy'])) { $this->referrerpolicy = $this->attributes['referrerpolicy']; }
-		if (isset($this->attributes['xmlns'])) { $this->xmlns = $this->attributes['xmlns']; }
-		if (isset($this->attributes['viewBox'])) { $this->viewBox = $this->attributes['viewBox']; }
+		if (isset($this->attributes['src'])) { $this->src = (string)$this->attributes['src']; }
+		if (isset($this->attributes['referrerpolicy'])) { $this->referrerpolicy = (string)$this->attributes['referrerpolicy']; }
+		if (isset($this->attributes['xmlns'])) { $this->xmlns = (string)$this->attributes['xmlns']; }
+		if (isset($this->attributes['viewBox'])) { $this->viewBox = (string)$this->attributes['viewBox']; }
 		if (isset($this->attributes['width'])) { $this->width = (int)$this->attributes['width']; }
 		if (isset($this->attributes['height'])) { $this->height = (int)$this->attributes['height']; }
 	}

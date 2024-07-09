@@ -70,14 +70,14 @@ final class Link extends Body
 	}
 	protected function mapLink(): void
 	{
-		if (isset($this->attributes['rel'])) { $this->rel = $this->attributes['rel']; }
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
-		if (isset($this->attributes['href'])) { $this->href = $this->attributes['href']; }
-		if (isset($this->attributes['sizes'])) { $this->sizes = $this->attributes['sizes']; }
-		if (isset($this->attributes['hreflang'])) { $this->hreflang = $this->attributes['hreflang']; }
-		if (isset($this->attributes['referrerpolicy'])) { $this->referrerpolicy = $this->attributes['referrerpolicy']; }
-		if (isset($this->attributes['integrity'])) { $this->integrity = $this->attributes['integrity']; }
-		if (isset($this->attributes['crossorigin'])) { $this->crossorigin = $this->attributes['crossorigin']; }
+		if (isset($this->attributes['rel'])) { $this->rel = (string)$this->attributes['rel']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
+		if (isset($this->attributes['href'])) { $this->href = (string)$this->attributes['href']; }
+		if (isset($this->attributes['sizes'])) { $this->sizes = (string)$this->attributes['sizes']; }
+		if (isset($this->attributes['hreflang'])) { $this->hreflang = (string)$this->attributes['hreflang']; }
+		if (isset($this->attributes['referrerpolicy'])) { $this->referrerpolicy = (string)$this->attributes['referrerpolicy']; }
+		if (isset($this->attributes['integrity'])) { $this->integrity = (string)$this->attributes['integrity']; }
+		if (isset($this->attributes['crossorigin'])) { $this->crossorigin = (string)$this->attributes['crossorigin']; }
 	}
 	#endregion
 }

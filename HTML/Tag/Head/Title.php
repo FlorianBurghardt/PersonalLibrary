@@ -41,7 +41,7 @@ final class Title extends Head
 	}
 	protected function mapTitle(): void
 	{
-		if (isset($this->attributes['title'])) { $this->title = $this->attributes['title']; }
+		if (isset($this->attributes['title'])) { $this->title = (string)$this->attributes['title']; }
 	}
 	#endregion
 }

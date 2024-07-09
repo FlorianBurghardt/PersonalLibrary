@@ -73,14 +73,14 @@ class Form extends Body
 	}
 	protected function mapForm(): void
 	{
-		if (isset($this->attributes['acceptCharset'])) { $this->acceptCharset = $this->attributes['acceptCharset']; }
-		if (isset($this->attributes['action'])) { $this->action = $this->attributes['action']; }
-		if (isset($this->attributes['autocomplete'])) { $this->autocomplete = $this->attributes['autocomplete']; }
-		if (isset($this->attributes['enctype'])) { $this->enctype = $this->attributes['enctype']; }
-		if (isset($this->attributes['method'])) { $this->method = $this->attributes['method']; }
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
-		if (isset($this->attributes['rel'])) { $this->rel = $this->attributes['rel']; }
-		if (isset($this->attributes['target'])) { $this->target = $this->attributes['target']; }
+		if (isset($this->attributes['acceptCharset'])) { $this->acceptCharset = (string)$this->attributes['acceptCharset']; }
+		if (isset($this->attributes['action'])) { $this->action = (string)$this->attributes['action']; }
+		if (isset($this->attributes['autocomplete'])) { $this->autocomplete = (string)$this->attributes['autocomplete']; }
+		if (isset($this->attributes['enctype'])) { $this->enctype = (string)$this->attributes['enctype']; }
+		if (isset($this->attributes['method'])) { $this->method = (string)$this->attributes['method']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
+		if (isset($this->attributes['rel'])) { $this->rel = (string)$this->attributes['rel']; }
+		if (isset($this->attributes['target'])) { $this->target = (string)$this->attributes['target']; }
 		if (isset($this->attributes['novalidate'])) { $this->novalidate = (bool)$this->attributes['novalidate']; }
 	}
 	#endregion

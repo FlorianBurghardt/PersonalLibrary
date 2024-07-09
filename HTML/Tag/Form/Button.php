@@ -81,14 +81,14 @@ class Button extends Body
 	}
 	protected function mapButton(): void
 	{
-		if (isset($this->attributes['form'])) { $this->form = $this->attributes['form']; }
-		if (isset($this->attributes['formaction'])) { $this->formaction = $this->attributes['formaction']; }
-		if (isset($this->attributes['formenctype'])) { $this->formenctype = $this->attributes['formenctype']; }
-		if (isset($this->attributes['formmethod'])) { $this->formmethod = $this->attributes['formmethod']; }
-		if (isset($this->attributes['formtarget'])) { $this->formtarget = $this->attributes['formtarget']; }
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
-		if (isset($this->attributes['value'])) { $this->value = $this->attributes['value']; }
+		if (isset($this->attributes['form'])) { $this->form = (string)$this->attributes['form']; }
+		if (isset($this->attributes['formaction'])) { $this->formaction = (string)$this->attributes['formaction']; }
+		if (isset($this->attributes['formenctype'])) { $this->formenctype = (string)$this->attributes['formenctype']; }
+		if (isset($this->attributes['formmethod'])) { $this->formmethod = (string)$this->attributes['formmethod']; }
+		if (isset($this->attributes['formtarget'])) { $this->formtarget = (string)$this->attributes['formtarget']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
+		if (isset($this->attributes['value'])) { $this->value = (string)$this->attributes['value']; }
 		if (isset($this->attributes['autofocus'])) { $this->autofocus = (bool)$this->attributes['autofocus']; }
 		if (isset($this->attributes['disabled'])) { $this->disabled = (bool)$this->attributes['disabled']; }
 		if (isset($this->attributes['formnovalidate'])) { $this->formnovalidate = (bool)$this->attributes['formnovalidate']; }

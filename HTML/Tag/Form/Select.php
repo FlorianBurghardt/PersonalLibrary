@@ -65,8 +65,8 @@ class Select extends Body
 	}
 	protected function mapSelect(): void
 	{
-		if (isset($this->attributes['form'])) { $this->form = $this->attributes['form']; }
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
+		if (isset($this->attributes['form'])) { $this->form = (string)$this->attributes['form']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
 		if (isset($this->attributes['size'])) { $this->size = (int)$this->attributes['size']; }
 		if (isset($this->attributes['autofocus'])) { $this->autofocus = (bool)$this->attributes['autofocus']; }
 		if (isset($this->attributes['disabled'])) { $this->disabled = (bool)$this->attributes['disabled']; }

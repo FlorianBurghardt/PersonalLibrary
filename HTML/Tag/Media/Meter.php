@@ -57,7 +57,7 @@ class Meter extends Progress
 	}
 	protected function mapMeter(): void
 	{
-		if (isset($this->attributes['form'])) { $this->form = $this->attributes['form']; }
+		if (isset($this->attributes['form'])) { $this->form = (string)$this->attributes['form']; }
 		if (isset($this->attributes['min'])) { $this->min = (float)$this->attributes['min']; }
 		if (isset($this->attributes['low'])) { $this->low = (float)$this->attributes['low']; }
 		if (isset($this->attributes['high'])) { $this->high = (float)$this->attributes['high']; }

@@ -69,13 +69,13 @@ class Img extends AbstractMedia
 	}
 	protected function mapImg(): void
 	{
-		if (isset($this->attributes['srcset'])) { $this->srcset = $this->attributes['srcset']; }
-		if (isset($this->attributes['sizes'])) { $this->sizes = $this->attributes['sizes']; }
-		if (isset($this->attributes['alt'])) { $this->alt = $this->attributes['alt']; }
-		if (isset($this->attributes['loading'])) { $this->loading = $this->attributes['loading']; }
-		if (isset($this->attributes['crossorigin'])) { $this->crossorigin = $this->attributes['crossorigin']; }
-		if (isset($this->attributes['usemap'])) { $this->usemap = $this->attributes['usemap']; }
-		if (isset($this->attributes['longdesc'])) { $this->longdesc = $this->attributes['longdesc']; }
+		if (isset($this->attributes['srcset'])) { $this->srcset = (string)$this->attributes['srcset']; }
+		if (isset($this->attributes['sizes'])) { $this->sizes = (string)$this->attributes['sizes']; }
+		if (isset($this->attributes['alt'])) { $this->alt = (string)$this->attributes['alt']; }
+		if (isset($this->attributes['loading'])) { $this->loading = (string)$this->attributes['loading']; }
+		if (isset($this->attributes['crossorigin'])) { $this->crossorigin = (string)$this->attributes['crossorigin']; }
+		if (isset($this->attributes['usemap'])) { $this->usemap = (string)$this->attributes['usemap']; }
+		if (isset($this->attributes['longdesc'])) { $this->longdesc = (string)$this->attributes['longdesc']; }
 		if (isset($this->attributes['ismap'])) { $this->ismap = (bool)$this->attributes['ismap']; }
 	}
 	#endregion

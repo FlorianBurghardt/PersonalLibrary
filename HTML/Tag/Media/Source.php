@@ -57,11 +57,11 @@ class Source extends Body
 	}
 	protected function mapSource(): void
 	{
-		if (isset($this->attributes['media'])) { $this->media = $this->attributes['media']; }
-		if (isset($this->attributes['src'])) { $this->src = $this->attributes['src']; }
-		if (isset($this->attributes['srcset'])) { $this->srcset = $this->attributes['srcset']; }
-		if (isset($this->attributes['sizes'])) { $this->sizes = $this->attributes['sizes']; }
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
+		if (isset($this->attributes['media'])) { $this->media = (string)$this->attributes['media']; }
+		if (isset($this->attributes['src'])) { $this->src = (string)$this->attributes['src']; }
+		if (isset($this->attributes['srcset'])) { $this->srcset = (string)$this->attributes['srcset']; }
+		if (isset($this->attributes['sizes'])) { $this->sizes = (string)$this->attributes['sizes']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
 	}
 	#endregion
 }

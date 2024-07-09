@@ -57,11 +57,11 @@ class Track extends Body
 	}
 	protected function mapTrack(): void
 	{
-		if (isset($this->attributes['default'])) { $this->default = $this->attributes['default']; }
-		if (isset($this->attributes['kind'])) { $this->kind = $this->attributes['kind']; }
-		if (isset($this->attributes['label'])) { $this->label = $this->attributes['label']; }
-		if (isset($this->attributes['src'])) { $this->src = $this->attributes['src']; }
-		if (isset($this->attributes['srclang'])) { $this->srclang = $this->attributes['srclang']; }
+		if (isset($this->attributes['default'])) { $this->default = (string)$this->attributes['default']; }
+		if (isset($this->attributes['kind'])) { $this->kind = (string)$this->attributes['kind']; }
+		if (isset($this->attributes['label'])) { $this->label = (string)$this->attributes['label']; }
+		if (isset($this->attributes['src'])) { $this->src = (string)$this->attributes['src']; }
+		if (isset($this->attributes['srclang'])) { $this->srclang = (string)$this->attributes['srclang']; }
 	}
 	#endregion
 }

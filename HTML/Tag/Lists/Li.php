@@ -40,7 +40,7 @@ class Li extends Body
 	}
 	protected function mapLi(): void
 	{
-		if (isset($this->attributes['value'])) { $this->value = $this->attributes['value']; }
+		if (isset($this->attributes['value'])) { $this->value = (string)$this->attributes['value']; }
 	}
 	#endregion
 }

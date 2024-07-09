@@ -41,7 +41,7 @@ class Map extends Body
 	}
 	protected function mapMap(): void
 	{
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
 	}
 	#endregion
 }

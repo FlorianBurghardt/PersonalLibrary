@@ -53,8 +53,8 @@ class Option extends Body
 	}
 	protected function mapOption(): void
 	{
-		if (isset($this->attributes['label'])) { $this->label = $this->attributes['label']; }
-		if (isset($this->attributes['value'])) { $this->value = $this->attributes['value']; }
+		if (isset($this->attributes['label'])) { $this->label = (string)$this->attributes['label']; }
+		if (isset($this->attributes['value'])) { $this->value = (string)$this->attributes['value']; }
 		if (isset($this->attributes['disabled'])) { $this->disabled = (bool)$this->attributes['disabled']; }
 		if (isset($this->attributes['selected'])) { $this->selected = (bool)$this->attributes['selected']; }
 	}

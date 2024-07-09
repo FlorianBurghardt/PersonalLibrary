@@ -62,11 +62,11 @@ class Object_ extends AbstractMedia
 	}
 	protected function mapObject(): void
 	{
-		if (isset($this->attributes['objectData'])) { $this->objectData = $this->attributes['objectData']; }
-		if (isset($this->attributes['form'])) { $this->form = $this->attributes['form']; }
-		if (isset($this->attributes['name'])) { $this->name = $this->attributes['name']; }
-		if (isset($this->attributes['usemap'])) { $this->usemap = $this->attributes['usemap']; }
-		if (isset($this->attributes['type'])) { $this->type = $this->attributes['type']; }
+		if (isset($this->attributes['objectData'])) { $this->objectData = (string)$this->attributes['objectData']; }
+		if (isset($this->attributes['form'])) { $this->form = (string)$this->attributes['form']; }
+		if (isset($this->attributes['name'])) { $this->name = (string)$this->attributes['name']; }
+		if (isset($this->attributes['usemap'])) { $this->usemap = (string)$this->attributes['usemap']; }
+		if (isset($this->attributes['type'])) { $this->type = (string)$this->attributes['type']; }
 		if (isset($this->attributes['typemustmatch'])) { $this->typemustmatch = (bool)$this->attributes['typemustmatch']; }
 	}
 	#endregion
