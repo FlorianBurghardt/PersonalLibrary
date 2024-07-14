@@ -1,6 +1,8 @@
 <?php
 #region usings
 namespace de\PersonalLibrary\Enum;
+
+use de\PersonalLibrary\Exception\NotFoundException;
 #endregion
 
 /**
@@ -10,7 +12,7 @@ namespace de\PersonalLibrary\Enum;
  * @author Florian Burghardt
  * @copyright Copyright (c) 2024, Florian Burghardt
  */
-enum StatusCode: int
+enum StatusCode: int implements IEnumBase
 {
 	case CONTINUE = 100;
 	case SWITCHING_PROTOCOLS = 101;
@@ -77,5 +79,22 @@ enum StatusCode: int
 	case LOOP_DETECTED = 508;
 	case NOT_EXTENDED = 510;
 	case NETWORK_AUTHENTICATION_REQUIRED = 511;
+
+	public static function get(string $keyword): self
+	{
+		foreach (self::cases() as $item)
+		{
+			if(strtoupper($item->name) === strtoupper($keyword)) { return $item; }
+		}
+			throw new NotFoundException($keyword.' is not an element of the Enum', StatusCode::NOT_FOUND->value, 9200);
+	}
+	public static function tryGet(string $keyword): self|null
+	{
+		foreach (self::cases() as $item)
+		{
+			if(strtoupper($item->name) === strtoupper($keyword)) { return $item; }
+		}
+		return null;
+	}
 }
 ?>

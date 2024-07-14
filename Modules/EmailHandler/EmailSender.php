@@ -27,7 +27,7 @@ class EmailSender
      * @param string $fromName Senders name
      * @return void
      */
-    public function __construct(string $from = 'no-reply_taverneolympos@fburghardt.de', string $fromName = 'No Reply')
+    public function __construct(string $from = 'no-reply@fburghardt.de', string $fromName = 'No Reply')
     {
         $this->from = $from;
         $this->fromName = $fromName;
@@ -68,7 +68,6 @@ class EmailSender
             $result->statusCode = StatusCode::NOT_FOUND->value;
             return $result;
         }
-
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: " . $this->fromName . " <" . $this->from . ">" . "\r\n";

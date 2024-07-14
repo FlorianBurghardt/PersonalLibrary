@@ -1,6 +1,8 @@
 <?php
 #region usings
 namespace de\PersonalLibrary\Enum;
+
+use de\PersonalLibrary\Exception\NotFoundException;
 #endregion
 
 /**
@@ -10,7 +12,7 @@ namespace de\PersonalLibrary\Enum;
  * @author Florian Burghardt
  * @copyright Copyright (c) 2024, Florian Burghardt
  */
-enum KeywordsSQL: string
+enum KeywordsSQL: string implements IEnumBase
 {
 	case ADD_CONSTRAINT = 'ADD CONSTRAINT';
 	case ADD = 'ADD';
@@ -77,5 +79,22 @@ enum KeywordsSQL: string
 	case VALUES = 'VALUES';
 	case VIEW = 'VIEW';
 	case WHERE = 'WHERE';
+
+	public static function get(string $keyword): self
+	{
+		foreach (self::cases() as $item)
+		{
+			if(strtoupper($item->name) === strtoupper($keyword)) { return $item; }
+		}
+			throw new NotFoundException($keyword.' is not an element of the Enum', StatusCode::NOT_FOUND->value, 9200);
+	}
+	public static function tryGet(string $keyword): self|null
+	{
+		foreach (self::cases() as $item)
+		{
+			if(strtoupper($item->name) === strtoupper($keyword)) { return $item; }
+		}
+		return null;
+	}
 }
 ?>

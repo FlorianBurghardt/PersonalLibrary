@@ -102,9 +102,9 @@ class DatabaseConnector
 		$result = $this->validate($input, new OutputDTO(), Request::POST);
 		if ($result->statusCode != StatusCode::OK->value) { return $result; }
 		
-		if (!empty($input->dataDTO))
+		if (!empty($input->dataDTO)) 
 		{
-			$input->data = $this->dtoToArray($input->dataDTO);
+			$input->data = $this->dtoToArray($input->dataDTO); 
 		}
 
 		$keys = array_keys($input->data);
@@ -151,8 +151,8 @@ class DatabaseConnector
 		$result = $this->validate($input, new OutputDTO(), Request::GET);
 		if ($result->statusCode != StatusCode::OK->value) { return $result; }
 		
-		$sql = $input->query;
-		if (empty($input->query))
+		if (!empty($input->query)) { $sql = $input->query; }
+		else
 		{
 			$sql = "SELECT * FROM {$input->table}";
 
@@ -426,13 +426,16 @@ class DatabaseConnector
 		}
 		if ($request === Request::GET)
 		{
-			$forbiddenKeyword = $this->checkForSQLKeywords($inputDTO->query, ['SELECT', 'FROM', 'WHERE', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'OUTER JOIN', 'ORDER BY']);
-			if (!empty($inputDTO->query) && $forbiddenKeyword['Success'] === false)
-			{ 
-				$outputDTO->errorMessage = 'The "query" contains forbidden SQL keyword "'.$forbiddenKeyword['Keyword'].'".';
-				$outputDTO->errorCode = 2120;
-				$outputDTO->statusCode = StatusCode::FORBIDDEN->value;
-				return $outputDTO;
+			if (!empty($inputDTO->query))
+			{
+				$forbiddenKeyword = $this->checkForSQLKeywords($inputDTO->query, ['SELECT', 'FROM', 'WHERE', 'JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'OUTER JOIN', 'ORDER BY']);
+				if ($forbiddenKeyword['Success'] === false)
+				{
+					$outputDTO->errorMessage = 'The "query" contains forbidden SQL keyword "'.$forbiddenKeyword['Keyword'].'".';
+					$outputDTO->errorCode = 2120;
+					$outputDTO->statusCode = StatusCode::FORBIDDEN->value;
+					return $outputDTO;
+				}
 			}
 			if (empty($inputDTO->query) && empty($inputDTO->table))
 			{ 
