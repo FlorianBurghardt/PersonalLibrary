@@ -10,7 +10,7 @@ namespace de\PersonalLibrary\Modules;
  * @author Florian Burghardt
  * @copyright Copyright (c) 2024, Florian Burghardt
  */
-class InputRenderer
+class Debug
 {
 	#region public static methods
 	/**
@@ -52,11 +52,11 @@ class InputRenderer
 		else { $type = 'Not supported format'; }			// Type: Not supported type
 
 		echo("<pre>");
-		echo("Display start: ".$comment."<br/>");
+		echo("Debug start: ".$comment."<br/>");
 		echo("Type: ".$type."<br/>");
 		print_r($input);
 		echo("<br/>");
-		echo("Display end:<br/>");
+		echo("Debug end:<br/>");
 		echo("</pre>");
 
 		if($stop) { exit(); }
