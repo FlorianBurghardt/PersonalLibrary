@@ -61,6 +61,9 @@ class Debug
 
 		if($stop) { exit(); }
 	}
+
+	public static function log(mixed $input, bool $stop = false, string $comment = ''): void { self::print($input, $stop, $comment); }
+	public static function debug(mixed $input, bool $stop = false, string $comment = ''): void { self::print($input, $stop, $comment); }
 	#endregion
 }
 ?>
