@@ -101,6 +101,8 @@ class DatabaseConnector
 	{
 		$result = $this->validate($input, new OutputDTO(), Request::POST);
 		if ($result->statusCode != StatusCode::OK->value) { return $result; }
+
+		$input = self::clean_input($input);
 		
 		if (!empty($input->dataDTO)) 
 		{
@@ -150,6 +152,8 @@ class DatabaseConnector
 	{
 		$result = $this->validate($input, new OutputDTO(), Request::GET);
 		if ($result->statusCode != StatusCode::OK->value) { return $result; }
+
+		$input = self::clean_input($input);
 		
 		if (!empty($input->query)) { $sql = $input->query; }
 		else
@@ -208,6 +212,8 @@ class DatabaseConnector
 		$result = $this->validate($input, new OutputDTO(), Request::PUT);
 		if ($result->statusCode != StatusCode::OK->value) { return $result; }
 
+		$input = self::clean_input($input);
+
 		$updateFields = [];
 		foreach ($input->data as $key => $value)
 		{
@@ -265,6 +271,8 @@ class DatabaseConnector
 		$result = $this->validate($input, new OutputDTO(), Request::DELETE);
 		if ($result->statusCode != StatusCode::OK->value) { return $result; }
 
+		$input = self::clean_input($input);
+
 		$sql = "DELETE FROM {$input->table}";
 
 		if (!empty($input->conditions))
@@ -310,6 +318,8 @@ class DatabaseConnector
 	{
 		$result = $this->validate($input, new OutputDTO(), Request::OPTIONS);
 		if ($result->statusCode != StatusCode::OK->value) { return $result; }
+
+		$input = self::clean_input($input);
 		
 		$sql = $input->query;
 		$stmt = $this->pdo->prepare($sql);
@@ -562,6 +572,37 @@ class DatabaseConnector
 
 		$outputDTO->statusCode = StatusCode::OK->value;
 		return $outputDTO;
+	}
+
+	/**
+	 * Prevents SQL injections
+	 * @param mixed $data
+	 * @return mixed
+	 */
+	private static function clean_input(mixed $data): mixed
+	{
+		if (is_array($data))
+		{
+			foreach ($data as $key => $value)
+			{
+				$data[$key] = self::clean_input($value);
+			}
+		}
+		else if (is_object($data))
+		{
+			$properties = get_object_vars($data);
+			foreach ($properties as $key => $value)
+			{
+				$properties[$key] = self::clean_input($value);
+			}
+		}
+		else
+		{
+			$data = trim($data);
+			$data = stripslashes($data);
+			$data = htmlspecialchars($data);
+		}
+		return $data;
 	}
 	#endregion
 }
