@@ -71,6 +71,20 @@ class Beauty
 
 		if($stop) { exit(); }
 	}
+
+	public static function getType(mixed $input): string
+	{
+		if (is_null($input)) { return 'null'; }
+		elseif (is_bool($input)) { return 'boolean'; }
+		elseif (is_int($input)) { return 'integer'; }
+		elseif (is_float($input)) { return 'float'; }
+		elseif (is_object($input)) { return 'object'; }
+		elseif (is_array($input)) { return 'array'; }
+		elseif (JSON::is_json($input)) { return 'json'; }
+		elseif (is_string($input)) { return 'string'; }
+		elseif (is_resource($input)) { return 'resource'; }
+		else { return 'unknown'; }
+	}
 	#endregion
 
 	#region private methods
@@ -113,20 +127,6 @@ class Beauty
 			echo('</div>');
 		}
 		return $data;
-	}
-
-	private static function getType(mixed $input): string
-	{
-		if (is_null($input)) { return 'null'; }
-		elseif (is_bool($input)) { return 'boolean'; }
-		elseif (is_int($input)) { return 'integer'; }
-		elseif (is_float($input)) { return 'float'; }
-		elseif (is_object($input)) { return 'object'; }
-		elseif (is_array($input)) { return 'array'; }
-		elseif (JSON::is_json($input)) { return 'json'; }
-		elseif (is_string($input)) { return 'string'; }
-		elseif (is_resource($input)) { return 'resource'; }
-		else { return 'unknown'; }
 	}
 	#endregion
 	
